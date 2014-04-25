@@ -29,7 +29,7 @@ public abstract class Command {
 
     public byte[] parse(Map<String, Command> commandMap, Element self) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        outputStream.write(start());
+        outputStream.write(start(self));
 
         List content = self.content();
         for (Object child : content) {
@@ -51,7 +51,7 @@ public abstract class Command {
             }
         }
 
-        outputStream.write(end());
+        outputStream.write(end(self));
         return outputStream.toByteArray();
     }
 
@@ -61,7 +61,7 @@ public abstract class Command {
         }
     }
 
-    protected abstract byte[] end();
+    protected abstract byte[] end(Element self);
 
-    protected abstract byte[] start();
+    protected abstract byte[] start(Element self);
 }

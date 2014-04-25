@@ -1,6 +1,4 @@
-import escpos.parser.CenterCommand;
-import escpos.parser.Command;
-import escpos.parser.JobCommand;
+import escpos.parser.*;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -21,7 +19,9 @@ public class EscPos {
 
     public EscPos() {
         addCommand(new JobCommand());
-        addCommand(new CenterCommand());
+        addCommand(new UnderlineCommand());
+        addCommand(new BoldCommand());
+        addCommand(new FontCommand());
     }
 
     public void addCommand(Command command) {
