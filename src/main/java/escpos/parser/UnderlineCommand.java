@@ -16,7 +16,7 @@ public class UnderlineCommand extends Command {
 
     @Override
     protected byte[] end(Element self) {
-        return new byte[]{0x1B, 0x2D, 0x0};
+        return new byte[]{0x1B, 0x2D, 0x0, '\n'};
     }
 
     @Override

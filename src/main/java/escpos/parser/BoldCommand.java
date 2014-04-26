@@ -15,7 +15,7 @@ public class BoldCommand extends Command {
 
     @Override
     protected byte[] end(Element self) {
-        return new byte[]{0x1B, 0x45, 0x0};
+        return new byte[]{0x1B, 0x45, 0x0, '\n'};
     }
 
     @Override

@@ -13,7 +13,7 @@ public class BrCommand extends Command {
 
     @Override
     protected byte[] end(Element self) {
-        return new byte[]{};
+        return new byte[]{'\n'};
     }
 
     @Override
