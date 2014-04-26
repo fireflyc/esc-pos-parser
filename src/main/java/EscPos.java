@@ -22,10 +22,17 @@ public class EscPos {
         addCommand(new UnderlineCommand());
         addCommand(new BoldCommand());
         addCommand(new FontCommand());
+
+        addCommand(new BrCommand());
+        addCommand("p", new BrCommand());
     }
 
     public void addCommand(Command command) {
         commandMap.put(command.tag(), command);
+    }
+
+    public void addCommand(String tag, Command command) {
+        commandMap.put(tag, command);
     }
 
     public byte[] parse(String text) {

@@ -18,7 +18,7 @@ public class FontCommand extends Command {
 
     @Override
     protected byte[] end(Element self) {
-        return new byte[]{0x1D, 0x21, 0x0, 0x1B, 0x61, 0};//恢复正常0
+        return new byte[]{0x1D, 0x21, 0x0};//恢复正常0
     }
 
     @Override
@@ -34,27 +34,28 @@ public class FontCommand extends Command {
         }
         byte h = (byte) (size << 4); //高4位
         byte sizeByte = (byte) (h | size); //合并
-        //对齐方式
-        byte alignByte = 0;
+        //用增加空格的方式居中或左对齐
+        //数字行宽 48
+        //汉字行宽 24
+        //总行宽=字节数 * 24
         Attribute alignAttr = self.attribute("align");
-        if (alignAttr != null && StringUtils.isNotEmpty(alignAttr.getText())) {
-            if (alignAttr.getText().equalsIgnoreCase("center")) {
-                alignByte = 1;
-            }
-            if (alignAttr.getText().equalsIgnoreCase("right")) {
-                alignByte = 2;
-            }
-        }
-
-        //字体样式
-        byte fontStyle = 0;
-        Attribute styleAttr = self.attribute("fstyle");
-        if (styleAttr != null && StringUtils.isNotEmpty(styleAttr.getText())) {
-            if (styleAttr.getText().equalsIgnoreCase("small")) {
-                fontStyle = 1;
+        String text = self.getTextTrim();
+        //最大行宽 48
+        int maxWidth = 48;
+        if (text.getBytes().length < maxWidth) {
+            if (alignAttr != null && StringUtils.isNotEmpty(alignAttr.getText())) {
+                if (alignAttr.getText().equalsIgnoreCase("center")) {
+                    text = PadUtils.center(text, maxWidth, ' ');
+                    self.setText(text);
+                }
+                if (alignAttr.getText().equalsIgnoreCase("right")) {
+                    text = PadUtils.leftPad(text, maxWidth, ' ');
+                    self.setText(text);
+                }
             }
         }
-        //设置字体大小、对齐方式和字体样式
-        return new byte[]{0x1D, 0x21, sizeByte, 0x1B, 0x61, alignByte, 0x1D, 0x66, fontStyle};
+        //设置字体大小、对齐方式
+        return new byte[]{0x1D, 0x21, sizeByte};
     }
+
 }

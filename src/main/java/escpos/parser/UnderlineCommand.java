@@ -16,15 +16,15 @@ public class UnderlineCommand extends Command {
 
     @Override
     protected byte[] end(Element self) {
-        return new byte[]{0x1B, 0x2D, 0};
+        return new byte[]{0x1B, 0x2D, 0x0};
     }
 
     @Override
     protected byte[] start(Element self) {
-        byte style = 1;
+        byte style = 0x1;
         Attribute doubleUnderline = self.attribute("b");
         if (doubleUnderline != null) {
-            style = 2;
+            style = 0x2;
         }
         return new byte[]{0x1B, 0x2D, style};
     }

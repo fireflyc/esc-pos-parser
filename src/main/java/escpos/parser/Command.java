@@ -52,6 +52,7 @@ public abstract class Command {
         }
 
         outputStream.write(end(self));
+        outputStream.write('\n');//换行
         return outputStream.toByteArray();
     }
 

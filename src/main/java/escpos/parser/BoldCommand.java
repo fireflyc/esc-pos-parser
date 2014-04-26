@@ -15,11 +15,11 @@ public class BoldCommand extends Command {
 
     @Override
     protected byte[] end(Element self) {
-        return new byte[]{0x1B, 0x45, 0};
+        return new byte[]{0x1B, 0x45, 0x0};
     }
 
     @Override
     protected byte[] start(Element self) {
-        return new byte[]{0x1B, 0x45, 1};
+        return new byte[]{0x1B, 0x45, 0x1};
     }
 }

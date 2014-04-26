@@ -12,18 +12,15 @@ public class MainTest {
     @Test
     public void testCommand() throws IOException {
 
-        String text = "<job>" +
-                "<b><font size=\"4\">伟大的标题</font></b>" +
-                "啊" +
-                "<font size=\"1\">哈哈哈1&gt;</font>" +
-                "<font size=\"2\" align=\"center\">哈哈哈2 &gt; </font>" +
-                "<font size=\"3\" align=\"right\" style=\"small\">哈哈哈3 &gt; </font>" +
-                "<b><font>哈哈哈4 &gt; </font></b>" +
-                "<b><font style=\"small\">~~~嘻嘻嘻</font></b>" +
-                "<u><font size=\"5\">哈哈哈5 &gt; </font></u></job>";
+        String text = "<job><font align=\"center\">xxxx公司小票</font>" +
+                "<font align=\"right\">这个不会居中</font>" +
+                "<p>今天天气如何啊？</p>"+
+                "<u>还行不错</u>"+
+                "<i>还行不错</i><br/><br/>"+
+                "</job>";
         EscPos pos = new EscPos();
         byte bytes[] = pos.parse(text);
-        FileOutputStream fileOutputStream = new FileOutputStream("/Users/fireflyc/DataHD/test.pos");
+        FileOutputStream fileOutputStream = new FileOutputStream("E:\\IdeaProjects\\test.pos");
         fileOutputStream.write(bytes);
     }
 }

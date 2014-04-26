@@ -3,25 +3,21 @@ package escpos.parser;
 import org.dom4j.Element;
 
 /**
- * User: xingsen
- * Date: 14-4-22
- * Time: 下午12:17
+ * Created by Administrator on 2014/4/26.
  */
-public class JobCommand extends Command {
+public class BrCommand extends Command {
     @Override
     public String tag() {
-        return "job";
+        return "br";
     }
 
     @Override
     protected byte[] end(Element self) {
-        return new byte[]{0x1D, 0x56, 0};
+        return new byte[]{};
     }
 
     @Override
     protected byte[] start(Element self) {
         return new byte[]{};
     }
-
-
 }
