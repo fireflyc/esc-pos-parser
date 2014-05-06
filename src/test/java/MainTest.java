@@ -1,6 +1,11 @@
+import escpos.EscPos;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 
 /**
  * User: xingsen
@@ -9,18 +14,19 @@ import java.io.IOException;
  */
 public class MainTest {
     public static void main(String[] args) throws IOException {
-        String text = "<job><font align=\"center\">xxxx公司小票</font>" +
-                "<font align=\"right\">这个不会居中</font>" +
-                "<font align=\"right\" fstyle=\"small\">这个不会居中,但是字体会不会小一些？</font>" +
-                "<p>今天天气如何啊？</p>" +
-                "<u>还行不错</u>" +
-                "<i>还行不错</i>" +
-                "我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o我是小浩浩,我是一个小淘气，囧 o(╯□╰)o<br/>" +
-                "我是一只呼啦熊我是一只呼啦熊我是一只呼啦熊我是一只呼啦熊我是一只呼啦熊我是一只呼啦熊我是一只呼啦熊我是一只呼啦熊我是一只呼啦熊我是一只呼啦熊我是一只呼啦熊<br/><br/><br/><br/><br/><br/><br/>"+
-                "</job>";
+        String text = "<job>测试内容内容</job>";
         EscPos pos = new EscPos();
         byte bytes[] = pos.parse(text);
         FileOutputStream fileOutputStream = new FileOutputStream("/Users/fireflyc/DataHD/test.pos");
-        fileOutputStream.write(bytes);
+        byte a[] = new String(bytes, "GBK").getBytes();
+        fileOutputStream.write(a);
+    }
+
+    public static byte[] toGbk(String text) {
+        Charset gbkCharset = Charset.forName("GBK");
+        ByteBuffer buffer = gbkCharset.encode(CharBuffer.wrap(text));
+        byte[] dst = new byte[buffer.remaining()];
+        buffer.get(dst);
+        return dst;
     }
 }

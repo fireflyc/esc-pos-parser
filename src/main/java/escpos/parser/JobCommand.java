@@ -15,7 +15,7 @@ public class JobCommand extends Command {
 
     @Override
     protected byte[] end(Element self) {
-        return new byte[]{0x1D, 0x56, 0};
+        return new byte[]{0x1D, 0x56, 0, '\n'};
     }
 
     @Override

@@ -1,4 +1,7 @@
+package escpos;
+
 import escpos.parser.*;
+import org.apache.commons.codec.binary.Base64;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -6,6 +9,7 @@ import org.dom4j.Element;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,5 +54,13 @@ public class EscPos {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String parseAsString(String text) throws UnsupportedEncodingException {
+        return new String(parse(text), "GBK");
+    }
+
+    public String parseAsBase64(String text) throws UnsupportedEncodingException {
+        return Base64.encodeBase64String(parse(text));
     }
 }
