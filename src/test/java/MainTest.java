@@ -14,11 +14,11 @@ import java.nio.charset.Charset;
  */
 public class MainTest {
     public static void main(String[] args) throws IOException {
-        String text = "<job>测试内容内容</job>";
+        String text = "<job>测试内容内容测试内容内容测试内容内容测试内容内容测试内容内容测试内容内容测试内容内容测试内容内容测试内容内容测试内容内容测试内容内容测试内容内容</job>";
         EscPos pos = new EscPos();
-        byte bytes[] = pos.parse(text);
+        String s = pos.parseAsBase64(text);
         FileOutputStream fileOutputStream = new FileOutputStream("/Users/fireflyc/DataHD/test.pos");
-        byte a[] = new String(bytes, "GBK").getBytes();
+        byte a[] = s.getBytes();
         fileOutputStream.write(a);
     }
 
